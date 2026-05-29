@@ -393,27 +393,19 @@
           <tbody>
             <tr>
               <td><code>declarativeNetRequest</code></td>
-              <td>Blocks ad network requests at the network layer before they load — without reading your traffic.</td>
-            </tr>
-            <tr>
-              <td><code>declarativeNetRequestFeedback</code></td>
-              <td>Allows the extension to count how many requests were blocked to display the badge number.</td>
+              <td>Applies the bundled <code>rules.json</code> rule set at Chrome's network layer to block requests to known ad servers, trackers, and popup networks before they load. The extension never reads the content of any blocked request.</td>
             </tr>
             <tr>
               <td><code>storage</code></td>
-              <td>Saves your on/off toggle state, whitelist, and allowed domains locally on your device.</td>
-            </tr>
-            <tr>
-              <td><code>scripting</code></td>
-              <td>Injects the content scripts that remove ad elements from pages and neutralize JavaScript popup tricks.</td>
+              <td>Persists your preferences (on/off toggle, site whitelist, permanently-allowed domains) in <code>chrome.storage.local</code> and tracks tab opener relationships in <code>chrome.storage.session</code> for the popup-scoring feature. All data stays on-device and is never transmitted.</td>
             </tr>
             <tr>
               <td><code>tabs</code></td>
-              <td>Tracks opener/opened tab relationships to power smart popup detection and auto-close repeat spam tabs.</td>
+              <td>Used to detect which tab opened a new tab (popup scoring), auto-close spam tabs, switch focus back to the original tab, and reload the current tab when the user toggles blocking on/off from the popup. No tab URLs or content are stored or transmitted.</td>
             </tr>
             <tr>
               <td><code>host_permissions: &lt;all_urls&gt;</code></td>
-              <td>Required to apply ad blocking rules and cosmetic element removal on every website you visit.</td>
+              <td>Required so that <code>declarativeNetRequest</code> rules apply on every website and content scripts (declared statically in the manifest) can run on every page to remove injected ad elements and neutralize JavaScript popup tricks.</td>
             </tr>
           </tbody>
         </table>
