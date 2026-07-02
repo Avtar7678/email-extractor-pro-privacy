@@ -131,55 +131,60 @@
 
     <div class="badge">Chrome Extension</div>
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: April 2026 &nbsp;·&nbsp; Email Extractor Pro v1.0.0</p>
+    <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Email, Phone &amp; Social Lead Extractor v1.3.0</p>
 
     <div class="highlight">
       📌 Short version: We collect nothing. All processing happens locally in your browser. No data is ever sent to any
-      server we operate.
+      server we operate, and we use no analytics or tracking.
     </div>
 
     <h2>1. What This Extension Does</h2>
-    <p>Email Extractor Pro is a browser extension that scans web pages to find and collect email addresses. It operates
-      in three modes:</p>
+    <p>This extension scans web pages to find and collect publicly available business-contact information — email
+      addresses, phone numbers, and social-media profile links — to help users build their own lead lists. It operates
+      in these modes:</p>
     <ul>
       <li><strong>Quick Scan</strong> — reads the content of the currently active tab.</li>
       <li><strong>Deep Scan</strong> — reads the current tab and fetches linked pages on the same site to look for
-        emails.</li>
+        contact details.</li>
       <li><strong>Bulk Scan</strong> — fetches a list of URLs provided by the user from an uploaded file and extracts
-        emails from each.</li>
+        contact details from each.</li>
+      <li><strong>Maps</strong> — when you are on a Google Maps or Google Search results page, reads the publicly
+        displayed business listings (name, category, rating, reviews, address, phone, website) so you can export them.
+        This feature only reads what is already shown on the page you opened.</li>
     </ul>
 
     <h2>2. Data We Collect</h2>
     <p>We do not collect, transmit, or store any personal data on external servers. Specifically:</p>
     <ul>
-      <li>The extension reads web page content (HTML source) solely to identify email address patterns.</li>
-      <li>Any email addresses found are displayed only within the extension popup and are never sent anywhere outside
-        your browser.</li>
+      <li>The extension reads web page content (HTML and visible text) solely to identify contact-information patterns
+        (emails, phone numbers, social links, and publicly listed business details).</li>
+      <li>Any results found are displayed only within the extension popup and are never sent anywhere outside your
+        browser.</li>
+      <li>Leads you choose to save are stored locally in your browser using IndexedDB and remain on your device only.</li>
       <li>URL lists uploaded via the Bulk Scan feature are processed entirely within your browser's memory and are never
         uploaded to any server.</li>
-      <li>Exported CSV files are saved directly to your local device using the browser's download mechanism.</li>
+      <li>Exported CSV, JSON, TXT, and vCard files are saved directly to your local device using the browser's download
+        mechanism.</li>
     </ul>
 
     <h2>3. Permissions Explained</h2>
     <ul>
       <li><strong>activeTab</strong> — required to read the content of the page you are currently viewing when you
         initiate a scan.</li>
-      <li><strong>scripting</strong> — required to execute the email-extraction script on the active tab's page.</li>
-      <li><strong>storage</strong> — used to save your scan preferences (chunk size, delay settings) locally on your
-        device.</li>
+      <li><strong>scripting</strong> — required to execute the extraction script on the active tab's page.</li>
       <li><strong>Host permission (&lt;all_urls&gt;)</strong> — required so the Deep Scan and Bulk Scan features can
-        fetch pages from any website to extract emails. No data from these requests is stored or transmitted beyond your
-        local browser session.</li>
+        fetch pages from any website you instruct it to scan, and so the Maps feature can read the Google page you have
+        open. No data from these requests is stored or transmitted beyond your local browser session.</li>
     </ul>
 
     <h2>4. Third-Party Requests</h2>
     <p>During a Deep Scan or Bulk Scan, the extension makes direct HTTP requests to websites you instruct it to scan.
       These are standard web requests made from your browser — no intermediary server is involved. The extension does
-      not load any third-party scripts, analytics, or tracking libraries.</p>
+      not load any third-party scripts, analytics, or tracking libraries, and does not sell or share any data.</p>
 
     <h2>5. Local Storage</h2>
-    <p>The extension uses <code>chrome.storage.local</code> exclusively to persist user preferences (such as chunk size
-      and delay settings). This data never leaves your device.</p>
+    <p>Leads you explicitly save, and your in-popup preferences, are stored locally in your browser (IndexedDB and
+      localStorage). This data never leaves your device and can be cleared at any time from within the extension.</p>
 
     <h2>6. Children's Privacy</h2>
     <p>This extension is not directed at children under 13 and does not knowingly collect information from children.</p>
