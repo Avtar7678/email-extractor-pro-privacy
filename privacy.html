@@ -131,7 +131,7 @@
 
     <div class="badge">Chrome Extension</div>
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Email, Phone &amp; Social Lead Extractor v1.3.0</p>
+    <p class="updated">Last updated: July 2026 &nbsp;·&nbsp; Email, Phone &amp; Social Lead Extractor v1.4.0</p>
 
     <div class="highlight">
       📌 Short version: We collect nothing. All processing happens locally in your browser. No data is ever sent to any
@@ -148,9 +148,14 @@
         contact details.</li>
       <li><strong>Bulk Scan</strong> — fetches a list of URLs provided by the user from an uploaded file and extracts
         contact details from each.</li>
-      <li><strong>Maps</strong> — when you are on a Google Maps or Google Search results page, reads the publicly
-        displayed business listings (name, category, rating, reviews, address, phone, website) so you can export them.
-        This feature only reads what is already shown on the page you opened.</li>
+      <li><strong>Maps</strong> — when you are on a Google Maps or Google Search results page and click "Scrape
+        Results," the extension reads the publicly displayed business listings (name, category, rating, reviews,
+        address) from that page. To read each business's phone number and address in full, the extension briefly
+        navigates your active tab to that business's own Google Maps page (one at a time, using your existing signed-in
+        session), reads the publicly displayed details, then returns your tab to where you started. If a business's
+        website is found, the extension also visits that business's own website once to look for a published contact
+        email address. All of this only happens after you click "Scrape Results," is limited to the number of
+        businesses you choose, and never sends any data to a server we operate.</li>
     </ul>
 
     <h2>2. Data We Collect</h2>
@@ -172,15 +177,23 @@
       <li><strong>activeTab</strong> — required to read the content of the page you are currently viewing when you
         initiate a scan.</li>
       <li><strong>scripting</strong> — required to execute the extraction script on the active tab's page.</li>
+      <li><strong>sidePanel</strong> — required to display the extension's interface as a persistent side panel instead
+        of a popup, so results stay visible while you browse.</li>
+      <li><strong>storage</strong> — required to save leads you explicitly choose to keep (via chrome.storage.local,
+        on your device only) and to track a temporary stop flag during an active Maps scrape (via
+        chrome.storage.session). Nothing under this permission is synced or transmitted anywhere.</li>
       <li><strong>Host permission (&lt;all_urls&gt;)</strong> — required so the Deep Scan and Bulk Scan features can
-        fetch pages from any website you instruct it to scan, and so the Maps feature can read the Google page you have
-        open. No data from these requests is stored or transmitted beyond your local browser session.</li>
+        fetch pages from any website you instruct it to scan, so the Maps feature can navigate to each business's own
+        Google Maps page to read its details, and so email enrichment can visit each business's own website. No data
+        from these requests is stored or transmitted beyond your local browser session.</li>
     </ul>
 
     <h2>4. Third-Party Requests</h2>
     <p>During a Deep Scan or Bulk Scan, the extension makes direct HTTP requests to websites you instruct it to scan.
-      These are standard web requests made from your browser — no intermediary server is involved. The extension does
-      not load any third-party scripts, analytics, or tracking libraries, and does not sell or share any data.</p>
+      During a Maps scrape, the extension navigates your own browser tab to each business's public Google Maps page and
+      to each business's own website, using your existing browser session — no separate server is involved. The
+      extension does not load any third-party scripts, analytics, or tracking libraries, and does not sell or share any
+      data.</p>
 
     <h2>5. Local Storage</h2>
     <p>Leads you explicitly save, and your in-popup preferences, are stored locally in your browser (IndexedDB and
