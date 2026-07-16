@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,32 +22,70 @@
 AppLock ("the app") is developed by [YOUR NAME / DEVELOPER NAME] ("we", "us").
 This policy explains what the app does with your information. In short:
 <strong>everything stays on your device — we do not collect, transmit, sell,
-or share any of your data with anyone, including us.</strong>
+or share any of your data with anyone, including us.</strong> The app makes
+no network requests of any kind.
 </p>
 
 <h2>What the app stores, and where</h2>
 <p>
 All data below is stored locally on your device only, using Android's
-EncryptedSharedPreferences (AES-256) or standard app-private storage. None of
-it is ever transmitted off your device, to us or to any third party.
+EncryptedSharedPreferences/EncryptedFile (AES-256) or standard app-private
+storage. None of it is ever transmitted off your device, to us or to any
+third party.
 </p>
 <ul>
-  <li><strong>Your PIN or pattern</strong> — stored only as a salted
-  cryptographic hash. The actual PIN/pattern is never stored or recoverable.</li>
+  <li><strong>Your PIN, pattern, or knock code</strong> — stored only as a
+  salted cryptographic hash. The actual credential is never stored or
+  recoverable, including by us.</li>
+  <li><strong>Your recovery code</strong> — stored as a salted hash, the same
+  way your PIN/pattern is.</li>
   <li><strong>Your list of locked apps</strong> and per-app notification
   privacy choices — package names only, stored locally.</li>
-  <li><strong>App settings</strong> — auto-lock delay, self-lock preference,
-  and similar preferences, stored locally.</li>
+  <li><strong>Photos and videos you choose to hide in the Hidden Vault</strong>
+  — encrypted on-device (AES-256-GCM) using Android's Jetpack Security
+  library. Only photos/videos you explicitly pick are affected; the app does
+  not scan or access your photo library beyond what you select. If you turn
+  on the optional "auto-hide new photos from a folder" feature, you choose
+  that folder yourself via Android's system file picker, and only that one
+  folder is watched.</li>
+  <li><strong>Intruder Log photos</strong> — optional feature; front-camera
+  photos taken after a failed unlock attempt are stored encrypted, locally
+  only.</li>
+  <li><strong>Files you create with the Tools</strong> (a generated QR code
+  image, a PDF you built from photos, a compressed photo) — saved either to
+  your own device gallery/files or wherever you choose via the system save
+  picker. Nothing is uploaded anywhere.</li>
+  <li><strong>App settings and usage-based stats shown to you</strong> —
+  auto-lock delay, feature toggles, your security-streak count, and the
+  screen-time figures shown in the Tools tab (computed from Android's own
+  Usage Access API, described below) — all stored locally, only ever
+  displayed back to you inside the app.</li>
 </ul>
 
 <h2>Permissions the app uses, and why</h2>
 <ul>
   <li><strong>Usage Access</strong> — lets the app detect which app is
   currently in the foreground, so it knows when to show the lock screen for
-  an app you've protected. The app does not log or transmit your usage
-  history anywhere.</li>
+  an app you've protected. It's also used to power the optional Screen Time
+  and Weekly Recap tools, which show you your own on-device usage stats. The
+  app does not transmit your usage history anywhere.</li>
   <li><strong>Display over other apps</strong> — needed to show the lock
   screen on top of a protected app.</li>
+  <li><strong>Camera</strong> — used in two optional, user-initiated places:
+  (1) the Intruder Log feature, which takes a front-camera photo after a
+  failed unlock attempt, stored encrypted on-device; and (2) the QR Scanner
+  tool, which reads a QR/barcode live using on-device recognition — no camera
+  frames or images are ever saved, uploaded, or leave the device for this
+  feature.</li>
+  <li><strong>Microphone</strong> — used only by the optional Voice
+  Calculator tool, to let you speak calculations instead of typing them.
+  Audio is processed by Android's on-device speech recognition while that
+  screen is open and is never recorded to a file, stored, or transmitted
+  anywhere. The microphone is only active while the Voice Calculator screen
+  is open on-screen, and stops the instant you leave it. (Separately, the
+  Voice Lock feature does not use this permission at all — it delegates
+  entirely to a system voice-input app and never touches the microphone
+  itself.)</li>
   <li><strong>Notification Access</strong> — optional, per-app feature. If
   you enable it for a specific app, AppLock replaces that app's notification
   text with a generic placeholder so previews don't leak content on your lock
@@ -61,19 +98,38 @@ it is ever transmitted off your device, to us or to any third party.
   fingerprint/face data never leaves Android's secure hardware and is never
   seen by AppLock or us.</li>
   <li><strong>Notifications (POST_NOTIFICATIONS)</strong> — used to show the
-  "protection active" status notification, and to post sanitized
-  notification replacements for the feature described above.</li>
+  "protection active" status notification (with a "Lock now" quick action),
+  and to post sanitized notification replacements for the feature described
+  above.</li>
+  <li><strong>Vibration</strong> — used only for the optional break-in alarm,
+  which vibrates (alongside an audible alarm) after repeated failed unlock
+  attempts.</li>
   <li><strong>Battery optimization exemption</strong> — optional, user-
   initiated. Lets the app keep running reliably in the background to detect
   app switches. You can decline or revoke this at any time in system
   Settings.</li>
 </ul>
 
+<h2>Files, photos, and documents you pick for the Tools</h2>
+<p>
+The QR Generator, PDF Toolkit, Photo Compressor, and Duplicate Finder tools
+only ever work with files you explicitly choose through Android's own system
+file/photo picker (or a folder you pick, for Duplicate Finder). AppLock never
+has standing access to your photo library or file system — each tool only
+sees the specific files you select in that moment, processes them entirely
+on-device, and saves the result back to your device or wherever you choose.
+Sharing a generated file (e.g. tapping "Share" on a QR code) uses Android's
+standard share sheet and only goes to whichever app you pick — AppLock itself
+never sends it anywhere.
+</p>
+
 <h2>Data we do NOT do</h2>
 <ul>
   <li>No analytics, crash reporting, or advertising SDKs.</li>
   <li>No account creation, no sign-in, no network requests of any kind.</li>
   <li>No data is sold, shared, or transmitted to any third party.</li>
+  <li>No standing access to your photo library, contacts, or files beyond
+  what you explicitly pick each time.</li>
 </ul>
 
 <h2>Children's privacy</h2>
